@@ -3,10 +3,28 @@ https://chatgpt.com/s/t_6900b847eba08191b2271acb8ac7b97e
 
 # Important Todo
 
-On your **self-hosted runner server** (deployment server). Run it once:
+1. Host-based Certbot + Mount into Docker (simpler for single container)
+
+- Install **Certbot** on your host server.
+- Request certificates for your domains:
 
 ```bash
-sudo docker network create app-network
+sudo certbot certonly --nginx -d example.com -d www.example.com
+sudo certbot certonly --nginx -d api.example.com
 ```
 
-Then all your apps (nginx, rails, react) running on that server will connect to it.
+- Certificates live in `/etc/letsencrypt/live/`.
+- Mount them into your Nginx container:
+
+```yaml
+volumes:
+  - /etc/letsencrypt/live:/etc/letsencrypt/live:ro
+```
+
+- Create a **cron job** or systemd timer to renew:
+
+```bash
+sudo crontab -e
+# Add:
+0 3 * * * certbot renew --post-hook "docker exec nginx-proxy nginx -s reload"
+```
