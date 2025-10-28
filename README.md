@@ -25,7 +25,7 @@ sudo certbot certonly --nginx -d api.example.com
 
 ```yaml
 volumes:
-  - /etc/letsencrypt/live:/etc/letsencrypt/live:ro
+  - /etc/letsencrypt:/etc/letsencrypt:ro
 ```
 
 - Create a **cron job** or systemd timer to renew:
