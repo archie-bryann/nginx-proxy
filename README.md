@@ -6,6 +6,13 @@ https://chatgpt.com/s/t_6900b847eba08191b2271acb8ac7b97e
 1. Host-based Certbot + Mount into Docker (simpler for single container)
 
 - Install **Certbot** on your host server.
+
+```bash
+sudo apt update
+sudo apt install -y certbot python3-certbot-nginx
+certbot --version
+```
+
 - Request certificates for your domains:
 
 ```bash
