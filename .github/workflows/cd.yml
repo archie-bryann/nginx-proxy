@@ -11,7 +11,19 @@ jobs:
     runs-on: self-hosted
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+        # 1️⃣ Ensure Docker network exists
+      - name: Ensure Docker Network Exists
+        run: |
+          NETWORK_NAME=app-network
+          if ! sudo docker network ls --format '{{.Name}}' | grep -wq "$NETWORK_NAME"; then
+            echo "Creating Docker network: $NETWORK_NAME"
+            sudo docker network create $NETWORK_NAME
+          else
+            echo "Docker network $NETWORK_NAME already exists"
+          fi
 
       - name: Pull Docker image
         run: sudo docker pull ${{ secrets.DOCKER_USERNAME }}/nginx-proxy:latest
