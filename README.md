@@ -38,14 +38,16 @@ sudo crontab -e
 
 # To install Docker Compose on Ubuntu
 
-Docker Compose V1 (sudo docker-compose)
+Docker Compose V1 (sudo docker-compose) ❌
 
 ```bash
 sudo apt install docker-compose -y
 ```
 
-Docker Compose V2 (sudo docker compose)
+Docker Compose V2 (sudo docker compose) ✅
 
 ```bash
 sudo apt install docker-compose-plugin -y
 ```
+
+Usually already installed
