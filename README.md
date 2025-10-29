@@ -35,3 +35,17 @@ sudo crontab -e
 # Add:
 0 3 * * * certbot renew --post-hook "docker exec nginx-proxy nginx -s reload"
 ```
+
+# To install Docker Compose on Ubuntu
+
+Docker Compose V1 (sudo docker-compose)
+
+```bash
+sudo apt install docker-compose -y
+```
+
+Docker Compose V2 (sudo docker compose)
+
+```bash
+sudo apt install docker-compose-plugin -y
+```
