@@ -14,5 +14,5 @@ services:
     restart: unless-stopped
 
 networks:
-  app-network:
+  app-network: # -> frontend -> backend
     external: true
